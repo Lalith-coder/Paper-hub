@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PaperHub Certificate of Publication</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* Page background */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e5e7eb;
+      font-family: "Times New Roman", Georgia, serif;
+    }
+
+    /* Landscape certificate container */
+    .page {
+      width: 1120px;
+      height: 790px;
+      margin: 20px auto;
+      background: #fdfcf7;
+      border: 10px solid #1F2937;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    /* Inner decorative border */
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 26px;
+      border: 3px double #9b7b3b;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      padding: 60px 80px;
+      height: 100%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* Logo / brand */
+    .brand {
+      font-size: 1.1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #374151;
+    }
+
+    .brand span {
+      color: #b7791f;
+      font-weight: 700;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 28px;
+    }
+
+    .title {
+      font-size: 2.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    .divider {
+      width: 210px;
+      height: 1px;
+      border-top: 1px solid #9ca3af;
+      border-bottom: 1px solid #f3f4f6;
+      margin: 10px auto 26px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #4b5563;
+      margin-bottom: 36px;
+    }
+
+    .label {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .line {
+      width: 380px;
+      height: 1px;
+      background: #9ca3af;
+      margin: 0 auto 20px;
+    }
+
+    .body-text {
+      font-size: 0.95rem;
+      color: #374151;
+      max-width: 720px;
+      margin: 0 auto 34px;
+      line-height: 1.6;
+    }
+
+    .body-text span {
+      font-style: italic;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: #374151;
+    }
+
+    .meta-block {
+      text-align: left;
+    }
+
+    .meta-label {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+
+    .meta-value {
+      font-weight: 600;
+    }
+
+    .sign-blocks {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60px;
+      font-size: 0.85rem;
+      color: #374151;
+    }
+
+    .sign {
+      text-align: center;
+      width: 40%;
+    }
+
+    .sign-line {
+      width: 70%;
+      height: 1px;
+      background: #9ca3af;
+      margin: 0 auto 6px;
+    }
+
+    .sign-role {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    /* QR placeholder */
+    .qr-box {
+      width: 110px;
+      height: 110px;
+      border: 1px solid #9ca3af;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #6b7280;
+      border-radius: 4px;
+    }
+
+    .qr-note {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      max-width: 150px;
+      text-align: left;
+    }
+
+    @media print {
+      body {
+        background: none;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="content">
+      <!-- Header / Branding -->
+      <div class="brand">Paper<span>Hub</span></div>
+      <div class="brand-sub">Student Research Journals Network</div>
+
+      <div class="title">Certificate of Publication</div>
+      <div class="divider"></div>
+
+      <!-- Recipient -->
+      <div class="label">This is to certify that</div>
+      <div class="name">[STUDENT NAME / AUTHOR NAME]</div>
+      <div class="line"></div>
+
+      <!-- Body text -->
+      <p class="body-text">
+        has successfully published the research paper titled
+        <span>“[Paper Title Goes Here]”</span>
+        in the <strong>PaperHub Journal of [Journal Name]</strong>,
+        Volume [Vol], Issue [Issue No.], dated [Month Year].
+      </p>
+
+      <!-- Meta info & QR -->
+      <div class="meta-row">
+        <div class="meta-block">
+          <div class="meta-label">Certificate ID</div>
+          <div class="meta-value">PH-[YEAR]-[XXXX]</div>
+
+          <div class="meta-label" style="margin-top: 10px;">Publication Date</div>
+          <div class="meta-value">[DD Month YYYY]</div>
+
+          <div class="meta-label" style="margin-top: 10px;">Journal</div>
+          <div class="meta-value">PaperHub Journal of [Journal Name]</div>
+        </div>
+
+        <div class="meta-block" style="text-align:right;">
+          <div class="qr-box">
+            QR Code
+          </div>
+          <div class="qr-note">
+            Scan to verify this certificate on the PaperHub online record page.
+          </div>
+        </div>
+      </div>
+
+      <!-- Signatures -->
+      <div class="sign-blocks">
+        <div class="sign">
+          <div class="sign-line"></div>
+          <div>Editor-in-Chief</div>
+          <div class="sign-role">PaperHub Journals</div>
+        </div>
+        <div class="sign">
+          <div class="sign-line"></div>
+          <div>Managing Editor</div>
+          <div class="sign-role">PaperHub Journals</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

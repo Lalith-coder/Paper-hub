@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Paper – PaperHub</title>
+  <style>
+    :root {
+      --primary: #1F3C88;
+      --primary-soft: #EBF1FF;
+      --accent: #FFB046;
+      --bg: #F5F5F7;
+      --text-dark: #111827;
+      --text-muted: #6B7280;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #F9FAFB, #EEF2FF);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* Navbar (simple) */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 4px 16px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      background: radial-gradient(circle at 0 0, #FFB046, #1F3C88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+      position: relative;
+    }
+
+    .logo-icon::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 21px;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 0 0 1px rgba(31, 60, 136, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      width: 11px;
+      height: 1.5px;
+      background: #1F3C88;
+      border-radius: 999px;
+      transform: translate(-2px, -3px);
+      box-shadow:
+        0 4px 0 #1F3C88,
+        0 8px 0 #1F3C88;
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-size: 1rem;
+    }
+
+    .logo-text-main span {
+      color: var(--accent);
+    }
+
+    .logo-text-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 9px 18px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(31, 60, 136, 0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(31, 60, 136, 0.55);
+      background: #182e66;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.03);
+      transform: translateY(-1px);
+    }
+
+    /* Header section */
+    .submit-header {
+      margin-top: 16px;
+      margin-bottom: 18px;
+    }
+
+    .submit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      background: rgba(239, 246, 255, 0.9);
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(191, 219, 254, 0.9);
+      color: #1D4ED8;
+      margin-bottom: 10px;
+    }
+
+    .submit-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22C55E;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.25);
+    }
+
+    .submit-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .submit-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    /* Form */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 14px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.82rem;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .input,
+    .select,
+    .textarea {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      font: inherit;
+      font-size: 0.86rem;
+      outline: none;
+      background: #F9FAFB;
+      transition: border 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(31, 60, 136, 0.28);
+      background: #fff;
+    }
+
+    .textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .helper {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    input[type="file"] {
+      padding: 6px 8px;
+      background: #F9FAFB;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.8rem;
+      margin-top: 6px;
+    }
+
+    .checkbox-row input {
+      margin-top: 2px;
+    }
+
+    .submit-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 16px;
+    }
+
+    /* Side panel */
+    .side-list {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      padding-left: 18px;
+    }
+
+    .side-list li {
+      margin-bottom: 5px;
+    }
+
+    .side-highlight {
+      background: var(--primary-soft);
+      border-radius: 14px;
+      padding: 10px 11px;
+      font-size: 0.8rem;
+      border: 1px dashed rgba(129, 140, 248, 0.8);
+      margin-top: 10px;
+    }
+
+    @media (max-width: 840px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Navbar -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="logo-icon"></div>
+        <div>
+          <div class="logo-text-main">Paper<span>Hub</span></div>
+          <div class="logo-text-sub">Student Research Journals Network</div>
+        </div>
+      </div>
+      <div>
+        <a href="index.html" class="btn btn-ghost">← Back to home</a>
+      </div>
+    </header>
+
+    <!-- Header text -->
+    <section class="submit-header">
+      <div class="submit-badge">
+        <div class="submit-dot"></div>
+        <span>Step 1: Share your details & manuscript</span>
+      </div>
+      <h1 class="submit-title">Research Paper Submission Form</h1>
+      <p class="submit-subtitle">
+        Fill in the details below and upload your paper. Our team will review your submission and share the decision and next steps over email/WhatsApp.
+      </p>
+    </section>
+
+    <!-- Layout -->
+    <section class="layout">
+      <!-- Left: Form card -->
+      <div class="card">
+        <div class="card-title">Author & paper details</div>
+        <div class="card-sub">Fields marked with * are mandatory.</div>
+
+        <!-- FormSubmit backend -->
+        <form action="https://formsubmit.co/shizu0068@gmail.com" method="POST" enctype="multipart/form-data">
+          <!-- FormSubmit settings -->
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="New PaperHub Submission">
+          <!-- You can change this to a thank-you page link later -->
+          <!-- <input type="hidden" name="_next" value="https://your-site.com/thank-you.html"> -->
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Full name of corresponding author *</label>
+              <input class="input" type="text" name="Corresponding Author" required />
+            </div>
+
+            <div class="form-field">
+              <label>Email ID *</label>
+              <input class="input" type="email" name="Email" required />
+            </div>
+
+            <div class="form-field">
+              <label>WhatsApp number *</label>
+              <input class="input" type="tel" name="WhatsApp Number" placeholder="+91-XXXXXXXXXX" required />
+            </div>
+
+            <div class="form-field">
+              <label>College / University *</label>
+              <input class="input" type="text" name="College / University" required />
+            </div>
+
+            <div class="form-field">
+              <label>Department / Course *</label>
+              <input class="input" type="text" name="Department / Course" placeholder="e.g., MBA – Finance" required />
+            </div>
+
+            <div class="form-field">
+              <label>Year / Semester *</label>
+              <input class="input" type="text" name="Year / Semester" placeholder="e.g., Final year / 3rd Sem" required />
+            </div>
+
+            <div class="form-field">
+              <label>Select journal *</label>
+              <select class="select" name="Journal" required>
+                <option value="">Choose journal</option>
+                <option>PHJMB – Management & Business</option>
+                <option>PHJET – Engineering & Technology</option>
+                <option>PHJCSAI – Computer Science & AI</option>
+                <option>PHJHSS – Humanities & Social Sciences</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Paper category *</label>
+              <select class="select" name="Paper Category" required>
+                <option value="">Select category</option>
+                <option>Original research article</option>
+                <option>Case study</option>
+                <option>Review paper</option>
+                <option>Project work / dissertation</option>
+              </select>
+            </div>
+
+            <div class="form-field full">
+              <label>Paper title *</label>
+              <input class="input" type="text" name="Paper Title" required />
+            </div>
+
+            <div class="form-field full">
+              <label>Abstract *</label>
+              <textarea class="textarea" name="Abstract" placeholder="Paste the abstract of your paper here..." required></textarea>
+            </div>
+
+            <div class="form-field full">
+              <label>Names of all authors (in order) *</label>
+              <textarea class="textarea" name="All Authors" placeholder="e.g., A. Kumar, B. Sharma, C. Reddy" required></textarea>
+              <div class="helper">Mention corresponding author with (Corresponding author) tag if needed.</div>
+            </div>
+
+            <div class="form-field full">
+              <label>Upload paper (PDF / DOC / DOCX) *</label>
+              <input class="input" type="file" name="Paper File" accept=".pdf,.doc,.docx" required />
+              <div class="helper">Upload the final version of your paper. Max size as allowed by FormSubmit/email.</div>
+            </div>
+
+            <div class="form-field full">
+              <label>Additional notes (optional)</label>
+              <textarea class="textarea" name="Notes" placeholder="Deadlines, conference linkage, faculty guide details, or anything else you want us to know."></textarea>
+            </div>
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="ethics" name="Ethics Agreement" value="Agreed" required />
+            <label for="ethics">
+              I confirm this is our original work, all co-authors are aware of this submission, and I understand that PaperHub is a student-focused journal (not UGC CARE / Scopus as of now).
+            </label>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn-primary">
+              Submit paper to PaperHub →
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right: Info card -->
+      <aside class="card">
+        <div class="card-title">Before you submit</div>
+        <p class="card-sub">
+          Make sure your paper is ready for basic screening. This helps us process your submission faster.
+        </p>
+
+        <ul class="side-list">
+          <li>Check grammar, spelling and basic structure (introduction, methodology, results, conclusion).</li>
+          <li>Ensure plagiarism is within reasonable academic limits as per your college norms.</li>
+          <li>Confirm all author names are spelled correctly and appear in the right order.</li>
+          <li>Keep your file name clear, e.g., <em>“Name_College_PaperTitle.pdf”</em>.</li>
+        </ul>
+
+        <div class="side-highlight">
+          <strong>What happens next?</strong>
+          <ul class="side-list">
+            <li>You'll receive a confirmation email with your submission details.</li>
+            <li>Our editorial team reviews your paper and shares a decision (accept / revise / reject).</li>
+            <li>On acceptance, you'll receive payment details (₹300 basic publication fee).</li>
+            <li>After publication, e-certificates are shared with all authors.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 32px; border-top: 1px solid rgba(209,213,219,0.8); padding-top: 14px; font-size: 0.78rem; color: var(--text-muted); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
+      <div>© PaperHub – Student Research Journals Network.</div>
+      <div class="footer-links" style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="index.html">Home</a>
+        <a href="#">Publication ethics</a>
+        <a href="#">Contact</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
